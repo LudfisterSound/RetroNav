@@ -4,7 +4,7 @@ This is a from-scratch CarPlay head unit built from off-the-shelf parts. The goa
 
 ## How it works
 
-An iPhone only starts CarPlay with an accessory that has Apple's MFi authentication chip. RetroNav uses an off-the-shelf Carlinkit dongle that has the chip and handles the phone side: Wi-Fi, Bluetooth, and USB. The dongle passes video and audio to the Pi over USB. The Pi decodes the stream, draws it inside RetroNav's own vintage-themed interface, and sends touch input back to the dongle.
+An iPhone only starts CarPlay with an accessory that has Apple's MFi authentication chip. LIVI runs the CarPlay protocol natively on the Pi, including the CarPlay Ultra cluster stream. A Carlinkit dongle reflashed as a **LIVI Link** supplies the MFi chip plus Wi-Fi and Bluetooth over USB. An MFi chip wired to the Pi's I2C bus also works. See [software.md](software.md).
 
 ```
  iPhone ──(wired USB or wireless Wi-Fi/BT)──> Carlinkit CPC200-CCPA
@@ -28,7 +28,7 @@ Prices are approximate US street prices as of late 2026.
 |---|------|-------------|---------|-------|
 | 1 | Computer | Raspberry Pi 5, 4 GB | $60 | Hardware HEVC decode, 2x CSI camera ports, PCIe for NVMe. A Pi 4 (2 GB+) works on a tight budget but can't handle multi-camera dashcam well. |
 | 2 | Cooling | Official Pi 5 Active Cooler | $5 | Required: cabins get hot in summer. |
-| 3 | CarPlay dongle | Carlinkit **CPC200-CCPA** | $50–70 | Only model confirmed for both wired and wireless with LIVI. Avoid the "wired-to-wireless" adapters, which need a factory CarPlay head unit. |
+| 3 | CarPlay dongle | Carlinkit **CPC200-CCPA** | $50–70 | Reflashed as a LIVI Link (MFi + radios). Check LIVI-LINK.md for supported firmware before buying. Avoid "wired-to-wireless" adapters, which need a factory CarPlay head unit. |
 | 4 | Display (default) | Raspberry Pi Touch Display 2, 7" (720×1280, DSI) | $60 | Official part, always in stock, no driver hassle, used in landscape. |
 | 4a | Display (alt) | Waveshare 7" HDMI capacitive, 1024×600 | $50 | Choose this when the screen must sit away from the Pi. |
 | 4b | Display (vintage alt) | Waveshare 5" round HDMI touch (1080×1080) | $75 | Fits a round gauge-style hole. CarPlay is letterboxed inside the round frame. |

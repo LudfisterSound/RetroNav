@@ -1,0 +1,16 @@
+# pi-gen configuration for the RetroNav image.
+IMG_NAME=retronav
+RELEASE=trixie
+TARGET_HOSTNAME=retronav
+FIRST_USER_NAME=retronav
+FIRST_USER_PASS=retronav
+DISABLE_FIRST_BOOT_USER_RENAME=1
+ENABLE_SSH=1
+LOCALE_DEFAULT=en_US.UTF-8
+KEYBOARD_KEYMAP=us
+KEYBOARD_LAYOUT="English (US)"
+TIMEZONE_DEFAULT=America/New_York
+WPA_COUNTRY=US
+DEPLOY_COMPRESSION=xz
+# Raspberry Pi OS Lite base plus the RetroNav stage, no desktop.
+STAGE_LIST="stage0 stage1 stage2 stage-retronav"

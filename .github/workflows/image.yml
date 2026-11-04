@@ -1,0 +1,45 @@
+name: Pi image
+
+on:
+  pull_request:
+    paths: ["image/**", ".github/workflows/image.yml"]
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      livi_channel:
+        description: "LIVI AppImage channel"
+        type: choice
+        options: [release, nightly]
+        default: release
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: shellcheck
+        run: |
+          shellcheck -s bash -e SC2154,SC2034 \
+            image/build.sh image/stage-retronav/prerun.sh \
+            image/stage-retronav/*/00-run.sh \
+            image/stage-retronav/01-livi/files/retronav-firstboot.sh
+
+  build:
+    needs: lint
+    # Native arm64 runner: pi-gen builds without emulation.
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        env:
+          LIVI_CHANNEL: ${{ inputs.livi_channel || 'release' }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: image/build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: retronav-image
+          path: image/deploy/*.img.xz
+          if-no-files-found: error
+          retention-days: 14
