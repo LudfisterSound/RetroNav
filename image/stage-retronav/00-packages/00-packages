@@ -1,0 +1,6 @@
+bluez libspa-0.2-bluetooth hostapd dnsmasq-base iw rfkill pulseaudio-utils
+avahi-daemon avahi-utils libva2 libva-drm2 libva-x11-2 mesa-va-drivers libssh-4
+libfontconfig1 libxkbcommon0 fuse3
+libseat1 libinput10 libgbm1 libegl1 libgles2 libwayland-client0 libwayland-cursor0
+libwayland-egl1 seatd pipewire pipewire-pulse wireplumber xdg-user-dirs curl
+i2c-tools git

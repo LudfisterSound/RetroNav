@@ -1,0 +1,17 @@
+[Unit]
+Description=RetroNav first-boot LIVI setup
+After=multi-user.target systemd-udevd.service
+ConditionPathExists=!/var/lib/retronav/firstboot.done
+
+[Service]
+Type=oneshot
+User=@USER@
+Environment=HOME=/home/@USER@
+Environment=USER=@USER@
+ExecStart=/opt/retronav/retronav-firstboot.sh
+StandardOutput=journal+console
+StandardError=journal+console
+TimeoutStartSec=15min
+
+[Install]
+WantedBy=multi-user.target
